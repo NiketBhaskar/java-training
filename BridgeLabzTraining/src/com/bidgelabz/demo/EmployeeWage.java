@@ -97,7 +97,35 @@ public class EmployeeWage {
 		}
 	}
 	static void conditionCalculation() {
-		
+			int MAX_HRS_IN_MONTH=100; 
+			int EMP_RATE_PER_HR=20; 
+			int NUM_WORKING_DAYS=20;
+			int totalEmpHr=0; 
+			int totalWorkingDays=0;
+
+			while(totalEmpHr <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_WORKING_DAYS)
+			{
+				totalWorkingDays++; 
+				int attendance=(int)(Math.random()*3); 
+				int empHrs=0;
+				System.out.println(attendance);
+				switch(attendance) 
+				{ case 1:
+					empHrs=8; 
+					break; 
+				case 2:
+					empHrs=8;
+					break;
+				default:
+					empHrs=0;
+					break; 
+				} 
+				totalEmpHr=(totalEmpHr+empHrs); 
+				System.out.println(totalEmpHr);
+			} 
+			int totalSalary=(totalEmpHr*EMP_RATE_PER_HR);
+			System.out.println("Salary Of Employee= "+totalSalary );
+
 	}
 
 	public static void main(String[] args) {
@@ -107,5 +135,6 @@ public class EmployeeWage {
 		partTimeWage();
 		solvingUsingSwitchCase();
 		monthlyWages();
+		conditionCalculation();
 	}
 }
