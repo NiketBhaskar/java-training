@@ -7,7 +7,7 @@ public class Factors {
 	 System.out.println("Provide input:");
 	int num= scanner.nextInt();
 	System.out.println("Prime Factors are : ");
-	for(int i = 2; i*i<= num; i++) {
+	for(int i = 2; i<= num; i++) {
         while(num%i == 0) {
            System.out.println(i+" ");
            num = num/i;

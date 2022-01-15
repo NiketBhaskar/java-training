@@ -8,7 +8,7 @@ public class SnakeLadder {
 	}
 	static int diceRoll() {
 		int diceNumber = (int)((Math.random()*6)+1);
-
+		System.out.println("dice output is "+diceNumber);
 		return diceNumber;
 	}
 	static String playerOption() {
@@ -28,38 +28,39 @@ public class SnakeLadder {
 		return optionSelected;
 		
 	}
-	public static void main(String[] args) {
-		int FinalPosition=100;
+	static void playturn() {
 		int position = 0;
+		int diceRollResult = diceRoll();
+		String playerSelectedOption = playerOption();
+		System.out.println("Player option is selected as : " +playerSelectedOption);
+		switch(playerSelectedOption) {
+		case "No Play":
+			break;
+		case "Ladder":
+			if(position+diceRollResult > 100) {
+				break;
+			}
+			else {
+			position = position + diceRollResult;
+			}
+			break;
+		case "Snake":
+			if(position - diceRollResult < 0) {
+				break;
+			}
+			else {
+			position = position - diceRollResult;
+			}
+			break;
+		}
+	
+		System.out.println("current Position is : "+position);
+	}
+	public static void main(String[] args) {
+		
 		player();
-		//	for(int i=1; i<=FinalPosition; i++) {
-				int diceRollResult = diceRoll();
-				String playerSelectedOption = playerOption();
-				System.out.println("Dice roll gave result as : " +diceRollResult);
-				System.out.println("Player option is selected as : " +playerSelectedOption);
-				switch(playerSelectedOption) {
-				case "No Play":
-					break;
-				case "Ladder":
-					if(position+diceRollResult > 100) {
-						break;
-					}
-					else {
-					position = position + diceRollResult;
-					}
-					break;
-				case "Snake":
-					if(position - diceRollResult < 0) {
-						break;
-					}
-					else {
-					position = position - diceRollResult;
-					}
-					break;
-				}
-			
-				System.out.println("current Position is : "+position);
-		//}
+		playturn();
+				
 	}
 	
 }
