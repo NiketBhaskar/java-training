@@ -2,13 +2,17 @@ package com.MedicalStore;
 
 import java.util.Scanner;
 
+import com.MedicalStore.Medicine.MedicineType;
+
 public class Main {
 	Scanner scanner = new Scanner(System.in);
-	MedicineStore medicineStore = new MedicineStore();
+//	MedicineStore medicineStore = MedicineStore.getInstance();
+//	UserInterface userInterface = UserInterface.getInstance();
 
 	public void handleUserSelection(int choice) {
-		UserInterface userInterface = new UserInterface();
-		
+		MedicineStore medicineStore = MedicineStore.getInstance();
+		UserInterface userInterface = UserInterface.getInstance();
+
 		switch (choice) {
 		case 1:
 			addMedicine();
@@ -22,30 +26,31 @@ public class Main {
 			userInterface.print(medicineStore.getMedicineList());
 			break;
 		case 4:
-			updateMedicine();
+			String medicineName = userInterface.selectMedicine();
+			Medicine medicineForUpdate = medicineStore.getMedicine(medicineName);
+			
+			int updateChoice = userInterface.showUpdateMenu();
+			updateMedicine(medicineForUpdate, updateChoice);
 			break;
 		case 5:
+			System.exit(0);
 			break;
 		default:
 
 		}
-		userInterface.showMainMenu();
-		handleUserSelection(choice);
 	}
 
-	public void updateMedicine() {
-		UserInterface userInterface = new UserInterface();
-		String medicineName = userInterface.selectMedicine();
-
-		Medicine medicineForUpdate = medicineStore.getMedicine(medicineName);
-		System.out.println(medicineForUpdate);
-
-		int updateChoice = userInterface.showUpdateMenu();
+	public void updateMedicine(Medicine medicineForUpdate, int updateChoice ) {
+		UserInterface userInterface = UserInterface.getInstance();
 
 		switch (updateChoice) {
 		case 1:
 			System.out.println("Current Name is : " + medicineForUpdate.name + ". Enter your new name :");
 			String newName = scanner.next();
+			if (medicineForUpdate.name == newName) {
+				System.out.println("Already Having This Name");
+				break;
+			}
 			medicineForUpdate.name = newName;
 			break;
 		case 2:
@@ -56,18 +61,35 @@ public class Main {
 		case 3:
 			System.out.println("Current Type is : " + medicineForUpdate.type + ". Enter your new Type :");
 //			medicineForUpdate.type = scanner.next();
+			int SelectedType = userInterface.showTypeOptions();
+			selectTypeForMedicine(SelectedType, medicineForUpdate);
 			break;
 		case 4:
-			System.out.println("Current price is : " + medicineForUpdate.type + ". Enter your new price :");
+			System.out.println("Current price is : " + medicineForUpdate.price + ". Enter your new price :");
 			medicineForUpdate.price = scanner.nextInt();
 			break;
 		case 5:
+			System.exit(0);
 			break;
 		}
 	}
 
+	public void selectTypeForMedicine(int SelectedType, Medicine medicineForUpdate) {
+		if (SelectedType == 1) {
+			medicineForUpdate.type = MedicineType.AYURVEDIC;
+		} else if (SelectedType == 2) {
+			medicineForUpdate.type = MedicineType.ALLOPATHY;
+
+		} else if (SelectedType == 3) {
+			medicineForUpdate.type = MedicineType.HOMEOPATHY;
+		} else {
+			System.out.println("Select Correct option i.e 1, 2 or 3");
+		}
+	}
+
 	public void addMedicine() {
-	
+		MedicineStore medicineStore = MedicineStore.getInstance();
+
 		Alfalfa alfalfa = new Alfalfa();
 		alfalfa.price = 120;
 		BTrim btrim = new BTrim();
@@ -87,7 +109,6 @@ public class Main {
 		medicineStore.add(crocin);
 		medicineStore.add(liv52);
 		medicineStore.add(vicks);
-
 	}
 
 	public static void main(String[] args) {
@@ -109,10 +130,14 @@ public class Main {
 		 * UserInterface userinterface = new UserInterface();
 		 * userinterface.print(medicineStore.getMedicineList());
 		 */
+		UserInterface userInterface = UserInterface.getInstance();
 
-		UserInterface userInterface = new UserInterface();
-		int choice = userInterface.showMainMenu();
 		Main main = new Main();
-		main.handleUserSelection(choice);
+
+		int choice = 0;
+		while (choice != 5) {
+			choice = userInterface.showMainMenu();
+			main.handleUserSelection(choice);
+		}
 	}
 }

@@ -1,9 +1,10 @@
 package com.MedicalStore;
 
 public abstract class Medicine {
-	enum MedicineType{
+	enum MedicineType {
 		AYURVEDIC, ALLOPATHY, HOMEOPATHY;
 	}
+
 	String name;
 	String brandName;
 	MedicineType type;
@@ -11,7 +12,7 @@ public abstract class Medicine {
 
 	@Override
 	public String toString() {
-		return "Medicine [brandName=" + brandName + ", type=" + type + ", price=" + price + "]";
+		return "Medicine [brandName=" + brandName + ", Name=" + name + ", type=" + type + ", price=" + price + "]";
 	}
 
 }
