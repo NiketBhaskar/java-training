@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class UserInterface {
 	Scanner scanner = new Scanner(System.in);
 
-	public void print(ArrayList medicineList) {
+	public void print(ArrayList<Medicine> medicineList) {
 		for (Object medicine : medicineList) {
 			System.out.println(medicine);
 		}
@@ -21,8 +21,15 @@ public class UserInterface {
 	}
 
 	public String selectMedicine() {
-		System.out.println("Enter the name of medicine to delete : ");
+		System.out.println("Enter the name of medicine : ");
 		String userSelection = scanner.next();
 		return userSelection;
+	}
+
+	public int showUpdateMenu() {
+		System.out.println("Select");
+		System.out.println("1. Update Name \n2. Update Brandname\n" + "3. Update Type\n4. Update Price\n5. Exit  ");
+		int updateChoice = scanner.nextInt();
+		return updateChoice;
 	}
 }
