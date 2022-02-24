@@ -10,7 +10,7 @@ public class UserInterface {
 		
 	}
 
-	public static UserInterface getInstance() {
+	public static synchronized UserInterface getInstance() {
 		if (instance == null) {
 			instance = new UserInterface();
 		}

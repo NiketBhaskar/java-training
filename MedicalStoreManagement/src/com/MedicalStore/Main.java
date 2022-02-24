@@ -6,8 +6,6 @@ import com.MedicalStore.Medicine.MedicineType;
 
 public class Main {
 	Scanner scanner = new Scanner(System.in);
-//	MedicineStore medicineStore = MedicineStore.getInstance();
-//	UserInterface userInterface = UserInterface.getInstance();
 
 	public void handleUserSelection(int choice) {
 		MedicineStore medicineStore = MedicineStore.getInstance();
@@ -28,7 +26,7 @@ public class Main {
 		case 4:
 			String medicineName = userInterface.selectMedicine();
 			Medicine medicineForUpdate = medicineStore.getMedicine(medicineName);
-			
+
 			int updateChoice = userInterface.showUpdateMenu();
 			updateMedicine(medicineForUpdate, updateChoice);
 			break;
@@ -40,7 +38,7 @@ public class Main {
 		}
 	}
 
-	public void updateMedicine(Medicine medicineForUpdate, int updateChoice ) {
+	public void updateMedicine(Medicine medicineForUpdate, int updateChoice) {
 		UserInterface userInterface = UserInterface.getInstance();
 
 		switch (updateChoice) {
@@ -60,9 +58,8 @@ public class Main {
 			break;
 		case 3:
 			System.out.println("Current Type is : " + medicineForUpdate.type + ". Enter your new Type :");
-//			medicineForUpdate.type = scanner.next();
-			int SelectedType = userInterface.showTypeOptions();
-			selectTypeForMedicine(SelectedType, medicineForUpdate);
+			int selectedType = userInterface.showTypeOptions();
+			selectTypeForMedicine(selectedType, medicineForUpdate);
 			break;
 		case 4:
 			System.out.println("Current price is : " + medicineForUpdate.price + ". Enter your new price :");
@@ -74,13 +71,13 @@ public class Main {
 		}
 	}
 
-	public void selectTypeForMedicine(int SelectedType, Medicine medicineForUpdate) {
-		if (SelectedType == 1) {
+	public void selectTypeForMedicine(int selectedType, Medicine medicineForUpdate) {
+		if (selectedType == 1) {
 			medicineForUpdate.type = MedicineType.AYURVEDIC;
-		} else if (SelectedType == 2) {
+		} else if (selectedType == 2) {
 			medicineForUpdate.type = MedicineType.ALLOPATHY;
 
-		} else if (SelectedType == 3) {
+		} else if (selectedType == 3) {
 			medicineForUpdate.type = MedicineType.HOMEOPATHY;
 		} else {
 			System.out.println("Select Correct option i.e 1, 2 or 3");
@@ -89,47 +86,27 @@ public class Main {
 
 	public void addMedicine() {
 		MedicineStore medicineStore = MedicineStore.getInstance();
+		UserInterface userInterface = UserInterface.getInstance();
 
-		Alfalfa alfalfa = new Alfalfa();
-		alfalfa.price = 120;
-		BTrim btrim = new BTrim();
-		btrim.price = 60;
-		Chawanparas chawanparas = new Chawanparas();
-		chawanparas.price = 250;
-		Crocin crocin = new Crocin();
-		crocin.price = 600;
-		Liv52 liv52 = new Liv52();
-		liv52.price = 350;
-		Vicks vicks = new Vicks();
-		vicks.price = 240;
+		Medicine medicine = new Medicine();
 
-		medicineStore.add(alfalfa);
-		medicineStore.add(btrim);
-		medicineStore.add(chawanparas);
-		medicineStore.add(crocin);
-		medicineStore.add(liv52);
-		medicineStore.add(vicks);
+		System.out.println("Enter the name of the medicine :");
+		medicine.name = scanner.next();
+		
+		System.out.println("Enter the brand name of the medicine :");
+		medicine.brandName = scanner.next();
+
+		System.out.println("Select the medicine type :");
+		int selectedType = userInterface.showTypeOptions();
+		selectTypeForMedicine(selectedType, medicine);
+		
+		System.out.println("Enter the Price :");
+		medicine.price = scanner.nextDouble();
+
+		medicineStore.add(medicine);
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * MedicineStore medicineStore = new MedicineStore();
-		 * 
-		 * Alfalfa alfalfa = new Alfalfa(); alfalfa.price = 120; BTrim btrim = new
-		 * BTrim(); btrim.price = 60; Chawanparas chawanparas = new Chawanparas();
-		 * chawanparas.price = 250; Crocin crocin = new Crocin(); crocin.price = 600;
-		 * Liv52 liv52 = new Liv52(); liv52.price = 350; Vicks vicks = new Vicks();
-		 * vicks.price = 240;
-		 * 
-		 * medicineStore.add(alfalfa); medicineStore.add(btrim);
-		 * medicineStore.add(chawanparas); medicineStore.add(crocin);
-		 * medicineStore.add(liv52); medicineStore.add(vicks);
-		 * 
-		 * medicineStore.remove(liv52);
-		 * 
-		 * UserInterface userinterface = new UserInterface();
-		 * userinterface.print(medicineStore.getMedicineList());
-		 */
 		UserInterface userInterface = UserInterface.getInstance();
 
 		Main main = new Main();

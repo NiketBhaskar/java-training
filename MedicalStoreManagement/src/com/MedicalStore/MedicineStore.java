@@ -9,7 +9,7 @@ public class MedicineStore {
 	private MedicineStore(){
 		
 	}
-	public static MedicineStore getInstance() {
+	public static synchronized MedicineStore getInstance() {
 		if(instance == null) {
 			instance = new MedicineStore();
 		}

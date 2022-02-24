@@ -1,6 +1,6 @@
 package com.MedicalStore;
 
-public abstract class Medicine {
+public class Medicine {
 	enum MedicineType {
 		AYURVEDIC, ALLOPATHY, HOMEOPATHY;
 	}
