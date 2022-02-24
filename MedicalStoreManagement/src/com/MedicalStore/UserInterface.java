@@ -7,7 +7,7 @@ public class UserInterface {
 	Scanner scanner = new Scanner(System.in);
 	private static UserInterface instance;
 	private UserInterface() {
-
+		
 	}
 
 	public static UserInterface getInstance() {
