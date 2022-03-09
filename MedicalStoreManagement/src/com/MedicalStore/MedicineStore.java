@@ -18,7 +18,7 @@ public class MedicineStore {
 	public void add(Medicine medicine) {
 		medicineList.add(medicine);
 	}
-
+	
 	public void remove(Medicine medicine) {
 		medicineList.remove(medicine);
 	}
@@ -26,6 +26,8 @@ public class MedicineStore {
 	public ArrayList<Medicine> getMedicineList() {
 		return medicineList;
 	}
+	
+	
 
 	public Medicine getMedicine(String name) {
 		for (Medicine medicine : medicineList) {

@@ -92,6 +92,7 @@ public class Main {
 
 		System.out.println("Enter the name of the medicine :");
 		medicine.name = scanner.next();
+	//	scanner.next();
 		
 		System.out.println("Enter the brand name of the medicine :");
 		medicine.brandName = scanner.next();
